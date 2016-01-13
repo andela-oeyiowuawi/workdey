@@ -31,7 +31,8 @@ class TasksManagementsController < ApplicationController
 
   def general_rating(user_id)
     rating = 0
-    Review.where(user_id: user_id).select { |user| rating += user.rating }
-    rating
+    user_ratings = Review.where(user_id: user_id)
+    user_ratings.select { |user| rating += user.rating }
+    user_ratings.empty? ? 0 : rating / (user_ratings.count)
   end
 end

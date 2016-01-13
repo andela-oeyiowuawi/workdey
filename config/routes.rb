@@ -32,4 +32,10 @@ Rails.application.routes.draw do
   get "pages/become_a_taskee"
 
   resources :users, only: [:create]
+
+  get "dashboard/tasks" => "tasks_managements#index", as: :my_tasks
+  get "dashboard/tasks/review" => "tasks_managements#show", as: :review_task
+  post "tasks_managements/update" => "tasks_managements#update", as: :completed
+
+
 end
