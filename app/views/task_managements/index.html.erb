@@ -6,7 +6,7 @@
         <table>
           <thead>
             <tr>
-              <td>Task id</td>
+              <td>Serial No</td>
               <td>Taskee Name</td>
               <td>Task Description</td>
             </tr>
@@ -19,7 +19,7 @@
                 <% user = User.find(task.taskee_id) %>
                 <td><%= taskee = "#{user.firstname} #{user.lastname}" %></td>
                 <td><%= desc = task.task_desc %></td>
-                <% details = { num: task.id, task: desc, taskee: taskee } %>
+                <% details = { num: task.id, task: desc, taskee: taskee, user_id: user.id } %>
                 <td>
                   <% if task.status.downcase == "done" %>
                     <span>Completed</span>

@@ -24,15 +24,17 @@ class TaskManagementsController < ApplicationController
 
   def review_and_rate(params)
     review = Review.new
-    review.rating = params[:rating] if params[:rating]
-    review.review = params[:comment] if params[:comment]
-    return "success" if review.save
+    if params[:user_id] && current_user.id
+      review.rating = params[:rating] if params[:rating]
+      review.reviewer_id = current_user.id
+      review.user_id = params[:user_id]
+      review.review = params[:comment] if params[:comment]
+      return "success" if review.save
+    end
   end
 
-  def general_rating(user_id)
-    rating = 0
-    user_ratings = Review.where(user_id: user_id)
-    user_ratings.select { |user| rating += user.rating }
-    user_ratings.empty? ? 0 : rating / (user_ratings.count)
+  def average_rating(user_id)
+    Review.connection.execute("SELECT (SUM(rating) / COUNT(rating)) AS average
+                              FROM reviews WHERE user_id = #{user_id}").first["average"]
   end
 end

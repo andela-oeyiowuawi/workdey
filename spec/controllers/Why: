@@ -9,4 +9,3 @@ Why:
     Also a general rating method that returns the average of all ratings for a particular user.
 [Finished: #107901354]
 
-if TaskManagement.find(id).update_attribute(:status, "done")
