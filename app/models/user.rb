@@ -50,6 +50,11 @@ class User < ActiveRecord::Base
     user ? user.update_attribute(:confirmed, true) : false
   end
 
+  def average_rating(user_id)
+    Review.connection.execute("SELECT (SUM(rating) / COUNT(rating)) AS average
+                              FROM reviews WHERE user_id = #{user_id}").first["average"]
+  end
+
   private
 
   def generate_confirm_token

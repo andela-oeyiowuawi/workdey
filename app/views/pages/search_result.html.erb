@@ -10,7 +10,11 @@
           <p><%= image_tag "boy.jpg", { class: "responsive-img circle" }%></p>
           <p><%= taskee.firstname.concat(taskee.lastname).titleize %></p>
           <p><%= taskee.street_address + "," %></p>
-          <p><%= (taskee.city + ", " + "#{taskee.state}" + ".").titleize %></p>
+          <p><%= taskee.street_address + "," %></p>
+          <p>
+            Average Rating: <br />
+            <%=  taskee.average_rating(taskee.id) %>
+          </p>
           <p>
             <%= link_to "View", user_profile_path(taskee_id: taskee.id),
                         class: "btn waves-effect" %>

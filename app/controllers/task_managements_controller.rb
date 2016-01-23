@@ -33,8 +33,4 @@ class TaskManagementsController < ApplicationController
     end
   end
 
-  def average_rating(user_id)
-    Review.connection.execute("SELECT (SUM(rating) / COUNT(rating)) AS average
-                              FROM reviews WHERE user_id = #{user_id}").first["average"]
-  end
 end
