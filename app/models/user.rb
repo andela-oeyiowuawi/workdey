@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :skillsets
   has_many :reviews
+  has_many :reviewers, class_name: "Review", foreign_key: :reviewer_id
   has_many :tasks, through: :skillsets
   has_many :tasks_given, class_name: "TaskManagement", foreign_key: :taskee_id
   has_many :tasks_created, class_name: "TaskManagement", foreign_key: :tasker_id
