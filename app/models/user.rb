@@ -51,8 +51,17 @@ class User < ActiveRecord::Base
   end
 
   def average_rating(user_id)
-    Review.connection.execute("SELECT (SUM(rating) / COUNT(rating)) AS average
+    average = Review.connection.execute("SELECT (SUM(rating) / COUNT(rating)) AS average
                               FROM reviews WHERE user_id = #{user_id}").first["average"]
+    average.nil? ? 0 : average
+  end
+
+  def has_no_reviews
+    reviews.map(&:review).all? { |comment| comment == ""}
+  end
+
+  def review_comments
+    reviews.where("review != ?", "")
   end
 
   private
