@@ -1,3 +1,4 @@
+
 <main>
     <div class="row view_profile">
       <h3 class= "col m6 offset-m5"><%= "#{ firstname = @user.firstname.capitalize }'s" %> Profile</h3>
@@ -15,7 +16,7 @@
           </p>
           <% unless current_user.user_type == "taskee" %>
             <% id = "WKDY#{@user.id}"%>
-            <%= link_to "ASSIGN TASK", assign_task_path(id: "#{id}"), class: "btn waves-effect" %>
+            <%= link_to "ASSIGN TASK", assign_task_path(obfuscate(id: @user.id)), class: "btn waves-effect" %>
           <% end %>
         </div>
       </div>

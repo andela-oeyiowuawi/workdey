@@ -20,7 +20,7 @@
             <% unless current_user %>
               <%= link_to "View", signin_path(flash[:invalid] = "Login to continue", id: taskee.id), class: "btn waves-effect searched-taskee" %>
             <% else %>
-              <%= link_to "View", user_profile_path(taskee_id: taskee.id),
+              <%= link_to "View", user_profile_path(obfuscate(taskee_id: taskee.id)),
                           class: "btn waves-effect searched-taskee" %>
             <% end %>
           </p>
