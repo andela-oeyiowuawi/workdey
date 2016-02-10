@@ -1,12 +1,15 @@
 class TaskManagementsController < ApplicationController
+  before_action :show_notification_count, only: [:show]
   def index
     @tasks = current_user.tasks_created
   end
 
   def show
+
   end
 
   def update
+    binding.pry
     id = params[:task_id]
     if TaskManagement.find(id).update_attribute(:status, "done")
       if review_and_rate(params)

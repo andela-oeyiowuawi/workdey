@@ -9,23 +9,17 @@
         <li><strong><%= label_tag "Task Description" %></strong><%= text_field_tag("description", params[:task], disabled: true ) %></li>
         <%= form_tag completed_path do %>
         <li><strong><%= label_tag "Add a comment about the taskee or their job:" %></strong></li>
-          <input type="hidden" name= "task_id" value= "<%= params[:num] %>" >
+          <input type="hidden" name= "task_id" value=4 "<%= params[:num] %>" >
           <input type="hidden" name= "user_id" value= "<%= params[:user_id] %>" >
         <li><%= text_area_tag "comment" %></li>
         <li><strong><%= label_tag "Rate taskee" %></strong>
           <div>&nbsp;</div>
-            <span class="starRating">
-              <input id="rating5" type="radio" name="rating" value="5">
-              <label for="rating5"></label>
-              <input id="rating4" type="radio" name="rating" value="4">
-              <label for="rating4"></label>
-              <input id="rating3" type="radio" name="rating" value="3">
-              <label for="rating3"></label>
-              <input id="rating2" type="radio" name="rating" value="2">
-              <label for="rating2"></label>
-              <input id="rating1" type="radio" name="rating" value="1">
-              <label for="rating1"></label>
-            </span>
+            <% 1.upto(5) do |n| %>
+              <div class="group">
+                <i class="fa fa-star-o"></i>
+                <input type="radio" name="rating" value="<%= n %>">
+              </div>
+            <% end %>
           <div>&nbsp;</div>
         </li>
         <li><button class="btn waves-effect" type="submit">Completed</button></li>

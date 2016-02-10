@@ -9,6 +9,7 @@ class Task < ActiveRecord::Base
     return nil if taskees.nil? || taskees.empty?
     taskees_nearby = get_taskees_nearby(taskees, @user_street, @user_city)
     other_taskees = taskees - taskees_nearby
+    # other_taskees = find_by_sql(taskees) - taskees_nearby
     [taskees_nearby, other_taskees].flatten
   end
 
@@ -16,6 +17,9 @@ class Task < ActiveRecord::Base
     taskees_nearby = taskees.where("city LIKE ? AND street_address LIKE ?",
                                    user_city, user_street
                                   )
+
+  # taskees_nearby = find_by_sql(taskees.where(users[:city].matches("%#{user_city}%")).to_sql)
+    # binding.pry
     if taskees_nearby.nil?
       taskees_nearby = taskees.where("city LIKE ?", user_city)
     end
@@ -27,4 +31,10 @@ class Task < ActiveRecord::Base
     @user_city = "%#{user_addy.first.first}%"
     @user_street = "%#{user_addy[0][1]}%"
   end
+
+  private_class_method
+  def self.users
+    User.arel_table
+  end
+
 end

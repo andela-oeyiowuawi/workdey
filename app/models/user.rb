@@ -83,9 +83,23 @@ class User < ActiveRecord::Base
     query_string = keyword.capitalize.to_s
     taskees = User.joins("JOIN skillsets ON skillsets.user_id = users.id").
               joins("JOIN tasks ON skillsets.task_id = tasks.id").
-              where("tasks.name LIKE ?", query_string)
+              where("tasks.name LIKE ?", query_string).
+              where("email != ?", user_email)
     return nil if taskees.nil? || taskees.empty?
-    return taskees if user_email.nil?
-    taskees.where("email != ?", user_email)
+    taskees
   end
+
+  private_class_method
+  def self.users
+    User.arel_table
+  end
+
+  def self.skillsets
+    Skillset.arel_table
+  end
+
+  def self.tasks
+    Task.arel_table
+  end
+
 end

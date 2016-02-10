@@ -1,32 +1,15 @@
-.starRating {
+.group input[type=radio] {
+  cursor: pointer;
+  z-index: -1;
+  pointer-events: none;
+  visibility: hidden;
+}
+.group {
   display: inline-block;
-  width: 15em;
-  height: 1.75em;
-  overflow: hidden;
-  input[type="radio"]:not(:checked), input[type="radio"]:checked {
-    opacity: 0 !important;
-  }
-  input[type="radio"]:not(:checked) + label, input[type="radio"]:checked + label {
-    width: 3em;
-    height: 1.5em !important;
-    background: image_url("star-off.png") no-repeat;
-    display: block !important;
-    float: right;
-    padding-left: 0 !important;
-    background-size: contain !important;
-  }
-  input[type="radio"] + label:before {
-    content: '';
-    padding-left: 0 !important;
-    display: block !important;
-    width : 1.3em;
-    height : 1.3em !important;
-    background : image_url("star-on.png") no-repeat;
-    background-size : contain;
-    opacity : 0;
-    transition : opacity 0.2s linear;
-  }
-  input[type="radio"] + label:hover:before, input[type="radio"] + label:hover ~ label:before, input[type="radio"]:checked + label:hover:before, input[type="radio"]:checked + label:hover ~ label:before {
-    opacity : 1;
-  }
+  margin: 0 0.75em;
+}
+.fa {
+  cursor: pointer;
+  color: #eb4D5c;
+  font-size: 1.5em;
 }
